@@ -41,7 +41,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
       var data = await Dio().get(ApiConfig.baseUrl + "surat/${event.noSurat}");
       final surahDetail = SurahDetail.fromJson(json.decode(data.toString()));
       emit(state.copyWith(status: HomeScreenStatus.success, listSurahDetail: surahDetail.data.ayat));
-      print(surahDetail.data.ayat[1].teksIndonesia);
+      print(surahDetail.data.ayat);
     } catch (e) {
       emit(state.copyWith(status: HomeScreenStatus.failure));
       print(e);
