@@ -1,15 +1,11 @@
 class AppStrings {
-  // Splash Screen
-  static const String appName = "Quran Al-Kareem";
-  static const String appDescription = "Learn Quran and Recite once everyday";
-  static const String btnStartTitle = "Get Started";
+  // New Strings
+  static const String appName = "Ngaji Yuk!";
 
-  // Home Screen
-  static const String btnQuranTitle = "Quran";
-  static const String btnPrayTitle = "Pray";
-  static const String btnLampTitle = "Lamp";
-  static const String btnDoaTitle = "Doa";
   static const String btnBookmarkTitle = "Bookmark";
+  static const String btnQuranTitle = "Quran";
+  static const String navSettingTitle = "Quran";
+  
   static const String headingBanner = "Last Read";
 }
 
@@ -24,7 +20,7 @@ class AppAssets {
   static const String iconBookmark = "assets/svgs/bookmark-icon.svg";
   static const String iconBook = "assets/svgs/book.svg";
 
-  // Image 
+  // Image
   static const String imageQuran = "assets/svgs/quran.svg";
   static const String imageNomorSurah = "assets/svgs/nomor-surah.svg";
 }

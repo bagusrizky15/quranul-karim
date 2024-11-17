@@ -1,6 +1,7 @@
 part of 'splash_screen_bloc.dart';
 
-@immutable
-sealed class SplashScreenState {}
+abstract class SplashState {}
 
-final class SplashScreenInitial extends SplashScreenState {}
+class SplashInitial extends SplashState {}
+
+class SplashCompleted extends SplashState {}

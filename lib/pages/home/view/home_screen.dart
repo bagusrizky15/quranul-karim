@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quran_alkarim/core/colors.dart';
 import 'package:quran_alkarim/core/strings.dart';
-import 'package:quran_alkarim/pages/home/view/tabs/hijb_tab.dart';
-import 'package:quran_alkarim/pages/home/view/tabs/page_tab.dart';
-import 'package:quran_alkarim/pages/home/view/tabs/para_tab.dart';
-import 'package:quran_alkarim/pages/home/view/tabs/surah_tab.dart';
+import 'package:quran_alkarim/data/model/surah.dart';
+import 'package:quran_alkarim/pages/home/bloc/home_screen_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,43 +13,145 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundDark,
-      bottomNavigationBar: _bottomNavigationBar(),
-      appBar: _appBar(),
-      body: DefaultTabController(
-        length: 4,
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-            child: NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                SliverToBoxAdapter(
-                  child: _buildBannerView(),
-                ),
-                SliverAppBar(
-                  pinned: true,
-                  elevation: 0,
-                  backgroundColor: AppColors.backgroundDark,
-                  automaticallyImplyLeading: false,
-                  shape: Border(bottom: BorderSide(color: Colors.grey.withOpacity(0.1))),
-                  bottom: PreferredSize(
-                    preferredSize: Size.fromHeight(0),
-                    child: TabBar(
-                        indicatorColor: AppColors.darkPurple,
-                        indicatorWeight: 3,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        labelColor: Colors.white,
-                        unselectedLabelColor: AppColors.text,
-                        tabs: [
-                          Tab(text: "Surah"),
-                          Tab(text: "Para"),
-                          Tab(text: "Page"),
-                          Tab(text: "Hijb"),
-                        ]),
+        bottomNavigationBar: _bottomNavigationBar(),
+        appBar: _appBar(),
+        body: BlocProvider(
+          create: (context) => HomeScreenBloc()..add(HomeScreenFetchData()),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Scaffold(
+              backgroundColor: AppColors.lightBackground,
+              body: BlocBuilder<HomeScreenBloc, HomeScreenState>(
+                builder: (context, state) {
+                  if (state.status == HomeScreenStatus.loading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state.status == HomeScreenStatus.failure) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Error to get data, please tap refresh',
+                            style: GoogleFonts.poppins(color: Colors.white, fontSize: 16),
+                          ),
+                          SizedBox(height: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<HomeScreenBloc>().add(HomeScreenFetchData());
+                            },
+                            child: Text('Refresh'),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return ListView.builder(
+                      itemCount: state.listSurah.length,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            _surahItem(state.listSurah[index], context),
+                            SizedBox(height: 5),
+                            Divider(
+                              color: AppColors.text.withOpacity(0.2),
+                              height: 0.5,
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
+            ),
+          ),
+        ));
+  }
+
+  Widget _surahItem(Datum surah, BuildContext context) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(noSurat: surah.nomor)));
+        print("Log - Clicked");
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          children: [
+            Stack(
+              children: [
+                SvgPicture.asset(AppAssets.imageNomorSurah),
+                SizedBox(
+                  height: 36,
+                  width: 36,
+                  child: Center(
+                    child: Text(
+                      surah.nomor.toString(),
+                      style: GoogleFonts.poppins(
+                        color: AppColors.primaryText,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                )
+                ),
               ],
-              body: TabBarView(children: [SurahTab(), ParaTab(), PageTab(), HijbTab()]),
-            )),
+            ),
+            SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    surah.namaLatin,
+                    style: GoogleFonts.poppins(
+                      color: AppColors.primaryText,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        surah.arti.toString().split('.').last,
+                        style: GoogleFonts.poppins(
+                          color: AppColors.secondaryText,
+                          fontSize: 12,
+                        ),
+                      ),
+                      SizedBox(width: 5),
+                      Container(
+                        width: 4,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          color: AppColors.text,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        "${surah.jumlahAyat} Ayat",
+                        style: GoogleFonts.poppins(
+                          color: AppColors.text,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Text(
+              "${surah.nama}",
+              style: GoogleFonts.amiri(
+                color: AppColors.text,
+                fontSize: 14,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -124,12 +225,12 @@ class HomeScreen extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
         showUnselectedLabels: false,
-        backgroundColor: AppColors.gray,
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: AppColors.text,
+        backgroundColor: AppColors.lightBackground,
+        selectedItemColor: AppColors.primaryText,
+        unselectedItemColor: AppColors.secondaryText,
         items: [
           _bottomNavBarItem(AppAssets.iconQuran, AppStrings.btnQuranTitle),
-          _bottomNavBarItem(AppAssets.iconPray, AppStrings.btnPrayTitle),
+          _bottomNavBarItem(AppAssets.iconPray, AppStrings.navSettingTitle),
           _bottomNavBarItem(AppAssets.iconBookmark, AppStrings.btnBookmarkTitle)
         ],
       );
@@ -149,21 +250,21 @@ class HomeScreen extends StatelessWidget {
   AppBar _appBar() {
     return AppBar(
       elevation: 0,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.lightBackground,
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(AppAssets.iconMenu),
-          ),
-          const SizedBox(width: 20),
           Text(
             AppStrings.appName,
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: AppColors.primaryText,
             ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search, color: AppColors.primaryText),
           ),
         ],
       ),

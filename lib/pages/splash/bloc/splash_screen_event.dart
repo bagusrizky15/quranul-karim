@@ -1,4 +1,5 @@
 part of 'splash_screen_bloc.dart';
 
-@immutable
-sealed class SplashScreenEvent {}
+abstract class SplashEvent {}
+
+class StartSplash extends SplashEvent {}

@@ -1,0 +1,4 @@
+{
+  "terminal.integrated.localEchoStyle": "dim",
+  "dart.flutterSdkPath": ".fvm/versions/3.22.2"
+}

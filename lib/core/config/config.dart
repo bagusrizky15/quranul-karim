@@ -1,27 +1,122 @@
 class ApiConfig {
   static const String baseUrl = "https://equran.id/api/v2/";
   static const String listSurah = "assets/json/list-surah.json";
-  static const String alFatihah = "assets/json/al-fatihah.json";
-  static const String alBaqarah = "assets/json/al-baqarah.json";
-  static const String alImran = "assets/json/al-imran.json";
-  static const String anNisa = "assets/json/an-nisa.json";
-  static const String alMaidah = "assets/json/al-maidah.json";
-  static const String alAnam = "assets/json/al-anam.json";
-  static const String alAraf = "assets/json/al-araf.json";
-  static const String alAnfal = "assets/json/al-anfal.json";
-  static const String atTawbah = "assets/json/at-tawbah.json";
-  static const String yunus = "assets/json/yunus.json";
-  static const String hud = "assets/json/hud.json";
-  static const String yusuf = "assets/json/yusuf.json";
-  static const String arRad = "assets/json/ar-rad.json";
-  static const String ibrahim = "assets/json/ibrahim.json";
-  static const String alHijr = "assets/json/al-hijr.json";
-  static const String anNahl = "assets/json/an-nahl.json";
-  static const String alIsra = "assets/json/al-isra.json";
-  static const String alKahf = "assets/json/al-kahf.json";
-  static const String maryam = "assets/json/maryam.json";
-  static const String taHa = "assets/json/ta-ha.json";
-  static const String alAnbiya = "assets/json/al-anbiya.json";
-  static const String alHajj = "assets/json/al-hajj.json";
-  static const String alMuminun = "assets/json/al-muminun.json";
 }
+
+Map<int, String> dataSurah = {
+  1: "assets/json/al-fatihah.json",
+  2: "assets/json/al-baqarah.json",
+  3: "assets/json/al-imran.json",
+  4: "assets/json/an-nisa.json",
+  5: "assets/json/al-maidah.json",
+  6: "assets/json/al-anam.json",
+  7: "assets/json/al-araf.json",
+  8: "assets/json/al-anfal.json",
+  9: "assets/json/at-tawbah.json",
+  10: "assets/json/yunus.json",
+  11: "assets/json/hud.json",
+  12: "assets/json/yusuf.json",
+  13: "assets/json/ar-rad.json",
+  14: "assets/json/ibrahim.json",
+  15: "assets/json/al-hijr.json",
+  16: "assets/json/an-nahl.json",
+  17: "assets/json/al-isra.json",
+  18: "assets/json/al-kahf.json",
+  19: "assets/json/maryam.json",
+  20: "assets/json/ta-ha.json",
+  21: "assets/json/al-anbiya.json",
+  22: "assets/json/al-hajj.json",
+  23: "assets/json/al-muminun.json",
+  24: "assets/json/an-nur.json",
+  25: "assets/json/al-furqan.json",
+  26: "assets/json/ash-shuara.json",
+  27: "assets/json/an-naml.json",
+  28: "assets/json/al-qasas.json",
+  29: "assets/json/al-ankabut.json",
+  30: "assets/json/ar-rum.json",
+  31: "assets/json/luqman.json",
+  32: "assets/json/as-sajdah.json",
+  33: "assets/json/al-ahzab.json",
+  34: "assets/json/saba.json",
+  35: "assets/json/fatir.json",
+  36: "assets/json/ya-sin.json",
+  37: "assets/json/as-saffat.json",
+  38: "assets/json/sad.json",
+  39: "assets/json/az-zumar.json",
+  40: "assets/json/ghafir.json",
+  41: "assets/json/fussilat.json",
+  42: "assets/json/ash-shura.json",
+  43: "assets/json/az-zukhruf.json",
+  44: "assets/json/ad-dukhan.json",
+  45: "assets/json/al-jathiyah.json",
+  46: "assets/json/al-ahqaf.json",
+  47: "assets/json/muhammad.json",
+  48: "assets/json/al-fath.json",
+  49: "assets/json/al-hujurat.json",
+  50: "assets/json/qaf.json",
+  51: "assets/json/adh-dhariyat.json",
+  52: "assets/json/at-tur.json",
+  53: "assets/json/an-najm.json",
+  54: "assets/json/al-qamar.json",
+  55: "assets/json/ar-rahman.json",
+  56: "assets/json/al-waqiah.json",
+  57: "assets/json/al-hadid.json",
+  58: "assets/json/al-mujadilah.json",
+  59: "assets/json/al-hashr.json",
+  60: "assets/json/al-mumtahanah.json",
+  61: "assets/json/as-saff.json",
+  62: "assets/json/al-jumuah.json",
+  63: "assets/json/al-munafiqun.json",
+  64: "assets/json/at-taghabun.json",
+  65: "assets/json/at-talaq.json",
+  66: "assets/json/at-tahrim.json",
+  67: "assets/json/al-mulk.json",
+  68: "assets/json/al-qalam.json",
+  69: "assets/json/al-haqqah.json",
+  70: "assets/json/al-maarij.json",
+  71: "assets/json/nuh.json",
+  72: "assets/json/al-jinn.json",
+  73: "assets/json/al-muzzammil.json",
+  74: "assets/json/al-muddathir.json",
+  75: "assets/json/al-qiyamah.json",
+  76: "assets/json/al-insan.json",
+  77: "assets/json/al-mursalat.json",
+  78: "assets/json/an-naba.json",
+  79: "assets/json/an-naziat.json",
+  80: "assets/json/abasa.json",
+  81: "assets/json/at-takwir.json",
+  82: "assets/json/al-infitar.json",
+  83: "assets/json/al-mutaffifin.json",
+  84: "assets/json/al-inshiqaq.json",
+  85: "assets/json/al-buruj.json",
+  86: "assets/json/at-tariq.json",
+  87: "assets/json/al-ala.json",
+  88: "assets/json/al-ghashiyah.json",
+  89: "assets/json/al-fajr.json",
+  90: "assets/json/al-balad.json",
+  91: "assets/json/ash-shams.json",
+  92: "assets/json/al-lail.json",
+  93: "assets/json/ad-duha.json",
+  94: "assets/json/ash-sharh.json",
+  95: "assets/json/at-tin.json",
+  96: "assets/json/al-alaq.json",
+  97: "assets/json/al-qadr.json",
+  98: "assets/json/al-bayyinah.json",
+  99: "assets/json/az-zalzalah.json",
+  100: "assets/json/al-adiyat.json",
+  101: "assets/json/al-qariah.json",
+  102: "assets/json/at-takathur.json",
+  103: "assets/json/al-asr.json",
+  104: "assets/json/al-humazah.json",
+  105: "assets/json/al-fil.json",
+  106: "assets/json/quraish.json",
+  107: "assets/json/al-maun.json",
+  108: "assets/json/al-kawthar.json",
+  109: "assets/json/al-kafirun.json",
+  110: "assets/json/an-nasr.json",
+  111: "assets/json/al-masad.json",
+  112: "assets/json/al-ikhlas.json",
+  113: "assets/json/al-falaq.json",
+  114: "assets/json/an-nas.json",
+};
+

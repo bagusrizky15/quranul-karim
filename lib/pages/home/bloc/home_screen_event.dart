@@ -14,12 +14,4 @@ class HomeScreenFetchData extends HomeScreenEvent {
   List<Object> get props => [];
 }
 
-class HomeScreenClickedSurah extends HomeScreenEvent {
-  final int noSurat;
-
-  HomeScreenClickedSurah({required this.noSurat});
-
-  @override
-  List<Object> get props => [noSurat];
-}
 
