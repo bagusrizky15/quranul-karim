@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quran_alkarim/core/colors.dart';
 import 'package:quran_alkarim/core/strings.dart';
 import 'package:quran_alkarim/data/model/surah.dart';
+import 'package:quran_alkarim/pages/detail/view/detail_screen.dart';
 import 'package:quran_alkarim/pages/quran/bloc/quran_bloc.dart';
 
 class QuranScreen extends StatefulWidget {
@@ -77,7 +78,7 @@ class _QuranState extends State<QuranScreen> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(noSurat: surah.nomor)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(nomorSurah: surah.nomor, namaSurah: surah.namaLatin,)));
         print("LOGGER : Surah ${surah.namaLatin}");
       },
       child: Padding(

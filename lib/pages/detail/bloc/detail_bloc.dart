@@ -10,29 +10,28 @@ part 'detail_event.dart';
 part 'detail_state.dart';
 
 class DetailBloc extends Bloc<DetailEvent, DetailState> {
-  DetailBloc() : super(DetailState.init()) {
+  DetailBloc() : super(DetailInitial()) {
     on<FetchSurahDetail>(onInitialized);
   }
 
   Future<void> onInitialized(FetchSurahDetail event, Emitter<DetailState> emit) async {
-    emit(DetailState.init());
-    emit(state.copyWith(status: DetailStatus.loading));
-    String? surahPath = detailSurah[event.noSurat];
+    emit(DetailInitial());
+    emit(DetailLoading());
+
+    String? surahPath = listNomorSurah[event.nomorSurah];
 
     if (surahPath == null) {
-      emit(state.copyWith(status: DetailStatus.failure));
+      emit(DetailError("Surah not found"));
       return;
     }
 
-    emit(state.copyWith(status: DetailStatus.loading));
     try {
       var data = await rootBundle.loadString(surahPath);
       final surahDetail = SurahDetail.fromJson(json.decode(data));
-      emit(state.copyWith(status: DetailStatus.success, listSurahDetail: surahDetail.data.ayat));
-      print(surahDetail.data.ayat);
+      emit(DetailLoaded(surahDetail));
     } catch (e) {
-      emit(state.copyWith(status: DetailStatus.failure));
-      print(e);
+      emit(DetailError(e.toString()));
+      print("LOGGER ERROR : $e");
     }
   }
 }

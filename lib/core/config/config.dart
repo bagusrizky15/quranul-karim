@@ -3,7 +3,7 @@ class ApiConfig {
   static const String listSurah = "assets/json/surah_list.json";
 }
 
-Map<int, String> detailSurah = {
+Map<int, String> listNomorSurah = {
   1: "assets/json/surah_files/surah_1.json",
   2: "assets/json/surah_files/surah_2.json",
   3: "assets/json/surah_files/surah_3.json",

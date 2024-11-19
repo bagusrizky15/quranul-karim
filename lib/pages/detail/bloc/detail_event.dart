@@ -7,10 +7,10 @@ abstract class DetailEvent extends Equatable {
 }
 
 class FetchSurahDetail extends DetailEvent {
-  final int noSurat;
+  final int nomorSurah;
 
-  FetchSurahDetail({required this.noSurat});
+  FetchSurahDetail({required this.nomorSurah});
 
   @override
-  List<Object> get props => [noSurat];
+  List<Object> get props => [nomorSurah];
 }

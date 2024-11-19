@@ -2,31 +2,29 @@ part of 'detail_bloc.dart';
 
 enum DetailStatus { init, loading, success, failure }
 
-class DetailState extends Equatable {
-  DetailState({
-    required this.status,
-    required this.listSurahDetail
-  });
-
-  final DetailStatus status;
-  late final List<Ayat> listSurahDetail;
-
-  DetailState.init() : status = DetailStatus.init,
-  listSurahDetail = <Ayat>[];
-
-  DetailState copyWith({
-    DetailStatus? status,
-    List<Ayat>? listSurahDetail
-  }) {
-    return DetailState(
-      status: status ?? this.status,
-      listSurahDetail: listSurahDetail ?? this.listSurahDetail
-    );
-  }
-  
+abstract class DetailState extends Equatable {
   @override
-  List<Object?> get props => <Object>[
-    status
-  ];
+  List<Object?> get props => [];
+}
 
+class DetailInitial extends DetailState {}
+
+class DetailLoading extends DetailState {}
+
+class DetailLoaded extends DetailState {
+  final SurahDetail surahDetail;
+
+  DetailLoaded(this.surahDetail);
+
+  @override
+  List<Object?> get props => [surahDetail];
+}
+
+class DetailError extends DetailState {
+  final String message;
+
+  DetailError(this.message);
+
+  @override
+  List<Object?> get props => [message];
 }
