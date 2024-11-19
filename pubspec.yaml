@@ -38,6 +38,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_svg: ^2.0.10+1
   google_fonts: ^6.2.1
+  package_rename: ^1.7.1
 
 dev_dependencies:
   flutter_test:

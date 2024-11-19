@@ -26,7 +26,7 @@ class SplashScreen extends StatelessWidget {
               style: GoogleFonts.poppins(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
-                color: AppColors.primaryText,
+                color: AppColors.txPrimary,
               ),
             ),
           ),

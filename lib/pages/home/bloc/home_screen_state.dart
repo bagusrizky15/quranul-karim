@@ -4,8 +4,8 @@ enum HomeScreenStatus { init, loading, success, failure }
 
 class HomeScreenState extends Equatable {
   HomeScreenState({
-    required this.status, 
-    required this.listSurah, 
+    required this.status,
+    required this.listSurah,
   });
 
   final HomeScreenStatus status;
@@ -17,12 +17,11 @@ class HomeScreenState extends Equatable {
 
   HomeScreenState copyWith({HomeScreenStatus? status, List<Datum>? listSurah, List<Ayat>? listSurahDetail}) {
     return HomeScreenState(
-        status: status ?? this.status, 
-        listSurah: listSurah ?? this.listSurah, 
+        status: status ?? this.status,
+        listSurah: listSurah ?? this.listSurah,
       );
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => <Object?>[status, listSurah];
 }

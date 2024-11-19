@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: AppColors.bgLight,
         bottomNavigationBar: _bottomNavigationBar(),
         appBar: _appBar(),
         body: BlocProvider(
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Scaffold(
-              backgroundColor: AppColors.lightBackground,
+              backgroundColor: AppColors.bgLight,
               body: BlocBuilder<HomeScreenBloc, HomeScreenState>(
                 builder: (context, state) {
                   if (state.status == HomeScreenStatus.loading) {
@@ -38,10 +39,12 @@ class HomeScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 10),
                           ElevatedButton(
+                            style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
                             onPressed: () {
                               context.read<HomeScreenBloc>().add(HomeScreenFetchData());
                             },
-                            child: Text('Refresh'),
+                            child:
+                                Text('Refresh', style: GoogleFonts.poppins(color: AppColors.txPrimary, fontSize: 16)),
                           ),
                         ],
                       ),
@@ -55,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                             _surahItem(state.listSurah[index], context),
                             SizedBox(height: 5),
                             Divider(
-                              color: AppColors.text.withOpacity(0.2),
+                              color: AppColors.txPrimary.withOpacity(0.2),
                               height: 0.5,
                             ),
                           ],
@@ -75,7 +78,7 @@ class HomeScreen extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: () {
         // Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(noSurat: surah.nomor)));
-        print("Log - Clicked");
+        print("LOGGER : Surah ${surah.namaLatin}");
       },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 10),
@@ -91,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                     child: Text(
                       surah.nomor.toString(),
                       style: GoogleFonts.poppins(
-                        color: AppColors.primaryText,
+                        color: AppColors.txPrimary,
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
@@ -108,7 +111,7 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     surah.namaLatin,
                     style: GoogleFonts.poppins(
-                      color: AppColors.primaryText,
+                      color: AppColors.txPrimary,
                       fontSize: 18,
                     ),
                   ),
@@ -117,7 +120,7 @@ class HomeScreen extends StatelessWidget {
                       Text(
                         surah.arti.toString().split('.').last,
                         style: GoogleFonts.poppins(
-                          color: AppColors.secondaryText,
+                          color: AppColors.txSecondary,
                           fontSize: 12,
                         ),
                       ),
@@ -126,7 +129,7 @@ class HomeScreen extends StatelessWidget {
                         width: 4,
                         height: 4,
                         decoration: BoxDecoration(
-                          color: AppColors.text,
+                          color: AppColors.txPrimary,
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -134,7 +137,7 @@ class HomeScreen extends StatelessWidget {
                       Text(
                         "${surah.jumlahAyat} Ayat",
                         style: GoogleFonts.poppins(
-                          color: AppColors.text,
+                          color: AppColors.txSecondary,
                           fontSize: 12,
                         ),
                       ),
@@ -146,8 +149,8 @@ class HomeScreen extends StatelessWidget {
             Text(
               "${surah.nama}",
               style: GoogleFonts.amiri(
-                color: AppColors.text,
-                fontSize: 14,
+                color: AppColors.txPrimary,
+                fontSize: 24,
               ),
             ),
           ],
@@ -156,93 +159,28 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBannerView() {
-    return Column(
-      children: [
-        Stack(
-          children: [
-            Container(
-              height: 160,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color(0xFFDF98FA),
-                      AppColors.primary.withOpacity(0.5),
-                    ],
-                  ),
-                  borderRadius: BorderRadius.circular(30)),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: SvgPicture.asset(AppAssets.imageQuran),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 20, left: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      SvgPicture.asset(AppAssets.iconBook, height: 25, width: 25),
-                      SizedBox(width: 10),
-                      Text(
-                        AppStrings.headingBanner,
-                        style: GoogleFonts.poppins(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "Al-Fatihah",
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
-                    "Ayat ke - 7",
-                    style: GoogleFonts.poppins(color: Colors.white, fontSize: 14),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ],
-    );
-  }
-
   BottomNavigationBar _bottomNavigationBar() => BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
         showUnselectedLabels: false,
-        backgroundColor: AppColors.lightBackground,
-        selectedItemColor: AppColors.primaryText,
-        unselectedItemColor: AppColors.secondaryText,
+        backgroundColor: AppColors.bgLight,
+        selectedItemColor: AppColors.txPrimary,
+        unselectedItemColor: AppColors.txSecondary,
         items: [
-          _bottomNavBarItem(AppAssets.iconQuran, AppStrings.btnQuranTitle),
-          _bottomNavBarItem(AppAssets.iconPray, AppStrings.navSettingTitle),
-          _bottomNavBarItem(AppAssets.iconBookmark, AppStrings.btnBookmarkTitle)
+          _bottomNavBarItem(AppAssets.iconQuran, AppStrings.navQuranTitle),
+          _bottomNavBarItem(AppAssets.iconPray, AppStrings.navPrayTitle),
+          _bottomNavBarItem(AppAssets.iconBookmark, AppStrings.navBookmarkTitle)
         ],
       );
 
   BottomNavigationBarItem _bottomNavBarItem(String icon, String label) {
     return BottomNavigationBarItem(
         // ignore: deprecated_member_use
-        icon: SvgPicture.asset(icon, color: AppColors.text),
+        icon: SvgPicture.asset(icon, color: AppColors.txSecondary),
         activeIcon: SvgPicture.asset(
           icon,
           // ignore: deprecated_member_use
-          color: AppColors.primary,
+          color: AppColors.txPrimary,
         ),
         label: label);
   }
@@ -250,7 +188,7 @@ class HomeScreen extends StatelessWidget {
   AppBar _appBar() {
     return AppBar(
       elevation: 0,
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: AppColors.bgLight,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -259,12 +197,12 @@ class HomeScreen extends StatelessWidget {
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: AppColors.primaryText,
+              color: AppColors.txPrimary,
             ),
           ),
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.search, color: AppColors.primaryText),
+            icon: Icon(Icons.search, color: AppColors.txPrimary),
           ),
         ],
       ),

@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "quran_alkarim" "\0"
+            VALUE "CompanyName", "cdwb" "\0"
+            VALUE "FileDescription", "Minimalist Quran" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "quran_alkarim" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "quran_alkarim.exe" "\0"
-            VALUE "ProductName", "quran_alkarim" "\0"
+            VALUE "InternalName", "Minimalist Quran" "\0"
+            VALUE "LegalCopyright", "Copyright ©️ 2024 cdwb. All rights reserved." "\0"
+            VALUE "OriginalFilename", "minimalistquran-win32.exe" "\0"
+            VALUE "ProductName", "Minimalist Quran" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

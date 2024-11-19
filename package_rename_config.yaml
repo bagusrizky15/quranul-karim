@@ -1,0 +1,31 @@
+package_rename_config:
+  android:
+    app_name: Minimalist Quran
+    package_name: com.cdwb.minimalistquran
+    override_old_package: com.example.quran_alkarim
+    lang: kotlin
+
+  ios:
+    app_name: Minimalist Quran
+    bundle_name: minimalistquran
+    package_name: com.cdwb.minimalistquran
+
+  web:
+    app_name: Minimalist Quran
+    description: com.cdwb.minimalistquran
+
+  linux:
+    app_name: Minimalist Quran
+    package_name: com.cdwb.minimalistquran
+    exe_name: minimalistquran-linux-x64
+
+  windows:
+    app_name: Minimalist Quran
+    organization: cdwb
+    copyright_notice: Copyright ©️ 2024 cdwb. All rights reserved.
+    exe_name: minimalistquran-win32
+
+  macos:
+    app_name: Minimalist Quran
+    package_name: com.cdwb.minimalistquran
+    copyright_notice: Copyright ©️ 2024 cdwb. All rights reserved.

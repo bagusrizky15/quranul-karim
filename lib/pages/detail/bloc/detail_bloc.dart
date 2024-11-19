@@ -17,7 +17,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
   Future<void> onInitialized(FetchSurahDetail event, Emitter<DetailState> emit) async {
     emit(DetailState.init());
     emit(state.copyWith(status: DetailStatus.loading));
-    String? surahPath = dataSurah[event.noSurat];
+    String? surahPath = detailSurah[event.noSurat];
 
     if (surahPath == null) {
       emit(state.copyWith(status: DetailStatus.failure));
